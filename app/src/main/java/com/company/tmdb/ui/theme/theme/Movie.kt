@@ -2,16 +2,17 @@ package com.company.tmdb.ui.theme.theme
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ListItem
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.res.painterResource
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.company.tmdb.R
@@ -20,59 +21,71 @@ import com.company.tmdb.R
 @Composable
 fun Movie(
     modifier: Modifier = Modifier,
-    movie: MovieModel,
+    movieModel: MovieModel,
     onMovieClick: (MovieModel) -> Unit = {},
     onMovieCheckedChange: (MovieModel) -> Unit = {}
     )
 {
-    Card (
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
-        elevation = 5.dp
-    )
-    {
-        Box(modifier = Modifier.height(200.dp)){
-            Image(
-                painter = movie.picture,
-                contentDescription = "nesto",
-                contentScale = ContentScale.Crop
-            )
-            ListItem (
-                trailing = {
-                    if (movie.isCheckedOff != null) {
-                    Checkbox(
-                        
+    Box(contentAlignment = Alignment.TopStart){
+        Image(
+            painterResource(id = R.drawable.kermit),
+            contentDescription = "",
+            modifier = modifier,
 
-                        checked = movie.isCheckedOff,
-                        onCheckedChange = { isChecked ->
-                            val newMovieState = movie.copy(isCheckedOff = isChecked)
-                            onMovieCheckedChange.invoke(newMovieState)
-                        },
-                        modifier = Modifier.padding(8.dp)
-                    )
-                }
-        }
+        )
+        FavoriteButton(modifier = Modifier.padding(12.dp), movieModel,
+            Color.Black)
 
-            ) {
-
-
-            }
-            
-
-        }
 
     }
 
-
-
-
 }
+
+
+
+@Composable
+fun FavoriteButton(
+    modifier: Modifier = Modifier,
+    movieModel: MovieModel,
+    color: Color,
+    onMovielick: (MovieModel) -> Unit = {},
+    onMovieCheckedChange: (MovieModel) -> Unit = {}
+) {
+
+    movieModel.isCheckedOff?.let {
+        IconToggleButton(
+        checked = it,
+        onCheckedChange = { isChecked ->
+            val newNoteState = movieModel.copy(isCheckedOff = isChecked)
+            onMovieCheckedChange.invoke(newNoteState)
+        }
+    ) {
+            Icon(
+                tint = color,
+                imageVector = if(movieModel.isCheckedOff){
+                    Icons.Filled.Favorite
+                } else {
+                    Icons.Default.FavoriteBorder
+                },
+                contentDescription = ""
+            )
+
+        }
+    }
+    
+}
+
+
+
+
+
 
 @Preview
 @Composable
 fun MoviePreview(){
-    Movie(movie = MovieModel(1, "Kermit", "Action, War",
-        "Not good not bad", false,  painterResource(id = R.drawable.kermit)))
+Movie(movieModel = MovieModel(2, "Kermit", "Action, War",
+        "Not good not bad",  true,  R.drawable.kermit
+))
 }
 
 data class MovieModel(
@@ -83,9 +96,9 @@ data class MovieModel(
 
     val overview: String,
     val isCheckedOff: Boolean?,
-    val picture: Painter
+    val picture: Int
 
 
 
 
-    )
+)
