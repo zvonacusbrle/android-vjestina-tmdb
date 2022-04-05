@@ -1,11 +1,23 @@
 package com.company.tmdb.ui.theme
 
-import android.util.Log
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
+
+import android.icu.text.CaseMap
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+
+import androidx.compose.material.*
+
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 import com.company.tmdb.R
 import com.company.tmdb.ui.theme.theme.Movie
@@ -29,23 +41,73 @@ fun HomeScreen (){
         )
     }
 
+    val rememberScaffoldState: ScaffoldState = rememberScaffoldState()
+
+
+
+    ScaffoldCompose()
+
 }
+
+@Composable
+fun ScaffoldCompose() {
+    Scaffold(
+        topBar = { TopAppBarCompose() }
+    ) {}
+}
+
+@Composable
+fun TopAppBarCompose(){
+        TopAppBar(
+            title = {
+                Box(modifier = Modifier.fillMaxWidth()){
+                    Image(painterResource(
+                        id = R.drawable.tmdb_logo),
+                        "Logo picture",
+                        modifier = Modifier
+                            .size(120.dp)
+                            .align(Alignment.Center)
+
+
+
+
+
+                    )
+                }
+            },
+
+            actions = {},
+            backgroundColor = Color(0xFF0B253F)
+
+
+        )
+
+}
+
+
+
+
+    
+
+
+
 
 @ExperimentalMaterialApi
 @Composable
 fun MovieList(
-    movie: List<MovieModel>,
+    movies: List<MovieModel>,
     onMovieCheckedChange: (MovieModel) -> Unit,
     onMovieClick: (MovieModel) -> Unit
 ) {
-    LazyColumn {
-        items(count = movie.size) { index ->
-            val movie = movie[index]
+    LazyRow {
+        items(count = movies.size) { index ->
+            val movie = movies[index]
             Movie(
-                movieModel = movie,
+                movie = movie,
                 onMovieClick = onMovieClick,
                 onMovieCheckedChange = onMovieCheckedChange
             )
+
         }
     }
 }
@@ -56,7 +118,7 @@ fun MovieList(
 @Composable
 fun MovieListPreview() {
     MovieList(
-        movie = listOf(
+        movies = listOf(
             MovieModel(
                 id = 1,
                 name = "Kermit",
@@ -69,7 +131,16 @@ fun MovieListPreview() {
             MovieModel(
                 id = 2,
                 name = "Kermit",
-                isCheckedOff = false,
+                isCheckedOff = true,
+                movieType = "Action",
+                overview = "None",
+                picture = R.drawable.kermit
+
+            ),
+            MovieModel(
+                id = 3,
+                name = "Kermit",
+                isCheckedOff = true,
                 movieType = "Action",
                 overview = "None",
                 picture = R.drawable.kermit
