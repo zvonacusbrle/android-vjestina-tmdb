@@ -3,10 +3,10 @@ package com.company.tmdb.ui.theme
 
 import android.icu.text.CaseMap
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 import androidx.compose.material.*
 
@@ -42,10 +42,18 @@ fun HomeScreen (){
     }
 
     val rememberScaffoldState: ScaffoldState = rememberScaffoldState()
+    val scrollState = rememberScrollState()
+
+    Column(modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
+            )
+
+    {
+        ScaffoldCompose()
+    }
 
 
-
-    ScaffoldCompose()
 
 }
 
@@ -65,18 +73,11 @@ fun TopAppBarCompose(){
                         id = R.drawable.tmdb_logo),
                         "Logo picture",
                         modifier = Modifier
-                            .size(120.dp)
+                            .size(130.dp)
                             .align(Alignment.Center)
-
-
-
-
-
                     )
                 }
             },
-
-            actions = {},
             backgroundColor = Color(0xFF0B253F)
 
 
