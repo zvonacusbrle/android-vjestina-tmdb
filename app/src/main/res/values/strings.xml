@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tmdb</string>
+    <string name="whatIsPopular">What\'s popular</string>
 </resources>

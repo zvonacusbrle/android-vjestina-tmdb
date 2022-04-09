@@ -2,39 +2,163 @@ package com.company.tmdb.ui.theme
 
 
 import android.icu.text.CaseMap
-import androidx.compose.foundation.Image
+import android.util.Log
+import android.widget.ToggleButton
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.materialIcon
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 import com.company.tmdb.R
 import com.company.tmdb.ui.theme.theme.Movie
 import com.company.tmdb.ui.theme.theme.MovieModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.selects.select
+import java.lang.reflect.Array.set
 
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen (){
+fun HomeScreen () {
     var movies by remember {
         mutableStateOf(
             listOf(
                 MovieModel(
                     id = 1,
                     name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.avengers_1
+
+                ),
+
+                MovieModel(
+                    id = 2,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.iron_man_1
+
+                ),
+                MovieModel(
+                    id = 3,
+                    name = "Kermit",
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.kermit
+                    picture = R.drawable.puppy_love
+
+                )
+            )
+        )
+    }
+
+    var popularMovies by remember {
+        mutableStateOf(
+            listOf(
+                MovieModel(
+                    id = 1,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.jungle_beat
+
+                ),
+
+                MovieModel(
+                    id = 2,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.jungle_beat
+
+                ),
+                MovieModel(
+                    id = 3,
+                    name = "Kermit",
+                    isCheckedOff = false,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.jungle_beat
+
+                )
+            )
+        )
+    }
+
+    var upcomingMovies by remember {
+        mutableStateOf(
+            listOf(
+                MovieModel(
+                    id = 1,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.avengers_1
+
+                ),
+
+                MovieModel(
+                    id = 2,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.jungle_beat
+
+                ),
+                MovieModel(
+                    id = 3,
+                    name = "Kermit",
+                    isCheckedOff = false,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.puppy_love
+
+                ),
+                MovieModel(
+                    id = 4,
+                    name = "Kermit",
+                    isCheckedOff = false,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.jungle_beat
 
                 )
             )
@@ -43,34 +167,293 @@ fun HomeScreen (){
 
     val rememberScaffoldState: ScaffoldState = rememberScaffoldState()
     val scrollState = rememberScrollState()
+    var flingBehavior: FlingBehavior? = null
+    var reverseScrolling: Boolean = false
 
-    Column(modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(state = scrollState)
+    Box(
+        modifier = Modifier
+            .background(backgroundColorApp)
+            .fillMaxSize()
+
+
+    ){
+        Column() {
+            Scaffold(
+                topBar = { TopAppBarCompose() },
+                content = {
+                    searchBar()
+                    sectionTitle("What's up")
+
+
+
+                }
             )
 
-    {
-        ScaffoldCompose()
+
+
+
+        }
+
+
     }
 
 
 
+    /*
+
+    Column(
+        modifier = Modifier
+            .verticalScroll(scrollState)
+
+        ) {
+
+
+        Spacer(modifier = Modifier
+            .height(115.dp))
+
+
+
+
+        whatsUpToolBar()
+        Spacer(modifier = Modifier.height(4.dp))
+
+        if (movies.isNotEmpty()) {
+
+            MovieList(
+
+                movies,
+                onMovieCheckedChange = { updatedMovie ->
+
+                    val index = movies.indexOfFirst { it.id == updatedMovie.id }
+                    movies = movies.toMutableList().apply { set(index, updatedMovie) }
+                },
+                onMovieClick = {
+
+                }
+
+            )
+        }
+
+        Text(
+            text = "Now playing",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(5.dp)
+        )
+
+        if (popularMovies.isNotEmpty()) {
+
+            MovieList(
+
+                popularMovies,
+                onMovieCheckedChange = { updatedMovie ->
+
+                    val index = popularMovies.indexOfFirst { it.id == updatedMovie.id }
+                    popularMovies = popularMovies.toMutableList().apply { set(index, updatedMovie) }
+                },
+                onMovieClick = {
+
+                }
+
+            )
+        }
+
+        Text(
+            text = "Upcoming",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(5.dp)
+        )
+
+        if (upcomingMovies.isNotEmpty()) {
+
+            MovieList(
+
+                upcomingMovies,
+                onMovieCheckedChange = { updatedMovie ->
+
+                    val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
+                    upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
+                },
+                onMovieClick = {
+
+                }
+
+            )
+        }
+
+        if (upcomingMovies.isNotEmpty()) {
+
+            MovieList(
+
+                upcomingMovies,
+                onMovieCheckedChange = { updatedMovie ->
+
+                    val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
+                    upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
+                },
+                onMovieClick = {
+
+                }
+
+            )
+        }
+
+
+    }
+
+     */
+
+
+
+   
+    
+
+
+
+
+
 }
 
 @Composable
-fun ScaffoldCompose() {
-    Scaffold(
-        topBar = { TopAppBarCompose() }
-    ) {}
+fun sectionTitle(titleName: String) {
+    Column() {
+        Text(
+            text = titleName,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+
+            modifier = Modifier
+                .padding(5.dp)
+        )
+    }
+
 }
 
+
 @Composable
-fun TopAppBarCompose(){
+    fun whatsUpToolBar() {
+
+        var tabIndex by remember { mutableStateOf(0) }
+        val tabData = listOf("Popular", "Top Rated")
+
+        TabRow(
+            selectedTabIndex = tabIndex,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentColor = Color.Black,
+            backgroundColor = Color.White
+        ) {
+
+            tabData.forEachIndexed { index, data ->
+                val selected = tabIndex == index
+
+                Tab(
+                    selected = selected,
+                    onClick = {
+                        tabIndex = index
+                    },
+                    modifier = Modifier,
+                    enabled = true,
+                    text = {
+                        Text(
+                            text = data,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    interactionSource = MutableInteractionSource()
+                )
+
+            }
+
+
+        }
+
+
+    }
+
+
+    @Composable
+    fun searchBar(
+        modifier: Modifier = Modifier,
+        hint: String = "Search",
+        onSearch: (String) -> Unit = {}
+    ) {
+
+
+        var text by remember {
+            mutableStateOf("")
+        }
+        var isHintDisplayed by remember {
+            mutableStateOf(hint != "")
+        }
+
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp),
+            contentAlignment = Alignment.TopCenter
+
+        ){
+
+        Box(
+            modifier = Modifier,
+
+        ) {
+           /* Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search icon"
+            )*/
+
+            BasicTextField(
+
+                value = text,
+                onValueChange = {
+                    text = it
+                    onSearch(it)
+                },
+                maxLines = 1,
+
+
+                textStyle = TextStyle(color = Color.Black),
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .shadow(5.dp, CircleShape)
+                    .background(color = Color.LightGray, CircleShape,)
+                    .padding(horizontal = 20.dp, vertical = 12.dp)
+                    .onFocusChanged {
+                        isHintDisplayed = it.isFocused != true
+                    }
+
+            )
+            if (isHintDisplayed) {
+                Text(
+                    text = hint,
+                    color = Color.Black,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
+                )
+            }
+        }
+
+
+    }
+    }
+
+
+
+
+
+    @Composable
+    fun TopAppBarCompose() {
         TopAppBar(
             title = {
-                Box(modifier = Modifier.fillMaxWidth()){
-                    Image(painterResource(
-                        id = R.drawable.tmdb_logo),
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Image(
+                        painterResource(
+                            id = R.drawable.tmdb_logo
+                        ),
                         "Logo picture",
                         modifier = Modifier
                             .size(130.dp)
@@ -83,75 +466,80 @@ fun TopAppBarCompose(){
 
         )
 
-}
+
+    }
 
 
+    @ExperimentalMaterialApi
+    @Composable
+    fun MovieList(
+        movies: List<MovieModel>,
+        onMovieCheckedChange: (MovieModel) -> Unit,
+        onMovieClick: (MovieModel) -> Unit
+    ) {
+        LazyRow {
+            items(count = movies.size) { index ->
+                val movie = movies[index]
+                Movie(
+                    movie = movie,
+                    onMovieClick = onMovieClick,
+                    onMovieCheckedChange = onMovieCheckedChange
+                )
 
-
-    
-
-
-
-
-@ExperimentalMaterialApi
-@Composable
-fun MovieList(
-    movies: List<MovieModel>,
-    onMovieCheckedChange: (MovieModel) -> Unit,
-    onMovieClick: (MovieModel) -> Unit
-) {
-    LazyRow {
-        items(count = movies.size) { index ->
-            val movie = movies[index]
-            Movie(
-                movie = movie,
-                onMovieClick = onMovieClick,
-                onMovieCheckedChange = onMovieCheckedChange
-            )
-
+            }
         }
     }
-}
 
 
-@ExperimentalMaterialApi
-@Preview
-@Composable
-fun MovieListPreview() {
-    MovieList(
-        movies = listOf(
-            MovieModel(
-                id = 1,
-                name = "Kermit",
-                isCheckedOff = false,
-                movieType = "Action",
-                overview = "None",
-                picture = R.drawable.kermit
+    @ExperimentalMaterialApi
+    @Preview
+    @Composable
+    fun MovieListPreview() {
+        MovieList(
+            movies = listOf(
+                MovieModel(
+                    id = 1,
+                    name = "Kermit",
+                    isCheckedOff = false,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.iron_man_1
 
+                ),
+                MovieModel(
+                    id = 2,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.avengers_1
+
+                ),
+                MovieModel(
+                    id = 3,
+                    name = "Kermit",
+                    isCheckedOff = true,
+                    movieType = "Action",
+                    overview = "None",
+                    picture = R.drawable.puppy_love
+
+                )
             ),
-            MovieModel(
-                id = 2,
-                name = "Kermit",
-                isCheckedOff = true,
-                movieType = "Action",
-                overview = "None",
-                picture = R.drawable.kermit
+            onMovieCheckedChange = {},
+            onMovieClick = {}
+        )
+    }
 
-            ),
-            MovieModel(
-                id = 3,
-                name = "Kermit",
-                isCheckedOff = true,
-                movieType = "Action",
-                overview = "None",
-                picture = R.drawable.kermit
 
-            )
-        ),
-        onMovieCheckedChange = {},
-        onMovieClick = {}
-    )
-}
-
+    @Preview
+    @Composable
+    fun searchBarPreview() {
+        searchBar(
+            hint = "Search",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+    }
 
 

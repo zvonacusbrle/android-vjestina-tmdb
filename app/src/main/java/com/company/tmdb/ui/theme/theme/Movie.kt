@@ -37,68 +37,65 @@ fun Movie(
         modifier = Modifier
             .padding(3.dp)
             .clip(Shapes.small)
-            .height(130.dp)
+
+
+
 
 
         ){
         Image(
-            painterResource(id = R.drawable.kermit),
+
+            painterResource(id = movie.picture),
             contentDescription = "",
             modifier = modifier
-
-
+                .height(179.dp)
+                .width(122.dp)
         )
 
 
-        FavoriteButton(modifier = Modifier.padding(10.dp), movie,
-            Color.Black)
+        ListItem (
+
+
+            trailing = { if(movie.isCheckedOff != null) {
+                Box(modifier = Modifier.fillMaxWidth(),
+                    Alignment.TopStart)
+                {
+                IconToggleButton(
+
+                    checked = movie.isCheckedOff!!,
+                    onCheckedChange = { isChecked ->
+                        Log.i("STANJE1 ", "$isChecked")
+                        val newModelState = movie.copy(isCheckedOff = isChecked)
+                        onMovieCheckedChange.invoke(newModelState)
+                        Log.i("STANJE2 ", "$isChecked")
+
+                    }
+                ) {
+
+                        Icon(
+
+                            tint = Color.White,
+                            imageVector = if(movie.isCheckedOff!!){
+                                Icons.Filled.Favorite
+                            } else {
+                                Icons.Default.FavoriteBorder
+                            },
+                            contentDescription = ""
+                        )
+
+                    }
+
+                }
+                }
+            },
+            modifier = Modifier.clickable { onMovieClick.invoke(movie) },
+            text = {Unit}
+        )
 
 
     }
-    modifier.clickable { onMovieClick.invoke(movie) }
-
-}
 
 
-
-@Composable
-fun FavoriteButton(
-    modifier: Modifier = Modifier,
-    movieModel: MovieModel,
-    color: Color,
-    onMovielick: (MovieModel) -> Unit = {},
-    onMovieCheckedChange: (MovieModel) -> Unit = {}
-) {
-
-    var isFavorite by remember { mutableStateOf(false) }
-
-    if(movieModel.isCheckedOff != null) {
-        IconToggleButton(
-        checked = movieModel.isCheckedOff!!,
-        onCheckedChange = { isChecked ->
-
-            val newModelState = movieModel.copy(isCheckedOff = isChecked)
-            onMovieCheckedChange.invoke(newModelState)
-
-
-
-
-        }
-    ) {
-            Icon(
-                tint = color,
-                imageVector = if(movieModel.isCheckedOff!!){
-                    Icons.Filled.Favorite
-                } else {
-                    Icons.Default.FavoriteBorder
-                },
-                contentDescription = ""
-            )
-
-        }
-
-    }
-    
 }
 
 
@@ -106,13 +103,18 @@ fun FavoriteButton(
 
 
 
+
+
+/*
 @Preview
 @Composable
 fun MoviePreview(){
-Movie(movie = MovieModel(2, "Kermit", "Action, War",
-        "Not good not bad",  true,  R.drawable.kermit
+Movie(movie = MovieModel(2, "Zeljezni covjek", "Action, War",
+        "Not good not bad",  true,  R.drawable.iron_man_1
 ))
 }
+
+ */
 
 data class MovieModel(
     val id: Long,

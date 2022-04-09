@@ -41,8 +41,25 @@
         <entry key="../../../../../../layout/compose-model-1649087849036.xml" value="0.125" />
         <entry key="../../../../../../layout/compose-model-1649090227604.xml" value="0.6879432624113475" />
         <entry key="../../../../../../layout/compose-model-1649090768690.xml" value="0.26944444444444443" />
+        <entry key="../../../../../../layout/compose-model-1649144680681.xml" value="0.165" />
+        <entry key="../../../../../../layout/compose-model-1649145539705.xml" value="0.335" />
+        <entry key="../../../../../../layout/compose-model-1649149872066.xml" value="0.45760233918128657" />
+        <entry key="../../../../../../layout/compose-model-1649166488712.xml" value="0.32314814814814813" />
+        <entry key="../../../../../../layout/compose-model-1649230689431.xml" value="0.5555555555555556" />
+        <entry key="../../../../../../layout/compose-model-1649230896385.xml" value="0.5555555555555556" />
+        <entry key="../../../../../../layout/compose-model-1649231048300.xml" value="0.5" />
+        <entry key="../../../../../../layout/compose-model-1649231281522.xml" value="0.2175925925925926" />
+        <entry key="../../../../../../layout/compose-model-1649231626368.xml" value="0.165" />
+        <entry key="../../../../../../layout/compose-model-1649232941249.xml" value="0.32222222222222224" />
+        <entry key="../../../../../../layout/compose-model-1649233149859.xml" value="0.32222222222222224" />
+        <entry key="../../../../../../layout/compose-model-1649233192072.xml" value="0.8111888111888111" />
+        <entry key="../../../../../../layout/compose-model-1649233661564.xml" value="0.27037037037037037" />
+        <entry key="../../../../../../layout/compose-model-1649233743712.xml" value="0.5" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/search_icon.xml" value="0.147" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/kermit.xml" value="0.2075" />
       </map>
     </option>
