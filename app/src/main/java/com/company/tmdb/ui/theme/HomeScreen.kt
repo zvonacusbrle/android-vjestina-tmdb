@@ -38,10 +38,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 import com.company.tmdb.R
 import com.company.tmdb.ui.theme.theme.Movie
-import com.company.tmdb.ui.theme.theme.MovieModel
+
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -53,8 +58,8 @@ import java.lang.reflect.Array.set
 fun HomeScreen () {
     var movies by remember {
         mutableStateOf(
-            listOf(
-                MovieModel(
+            mutableListOf(
+                Movie(
                     id = 1,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -64,7 +69,7 @@ fun HomeScreen () {
 
                 ),
 
-                MovieModel(
+                Movie(
                     id = 2,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -73,7 +78,7 @@ fun HomeScreen () {
                     picture = R.drawable.iron_man_1
 
                 ),
-                MovieModel(
+                Movie(
                     id = 3,
                     name = "Kermit",
                     isCheckedOff = false,
@@ -88,8 +93,8 @@ fun HomeScreen () {
 
     var popularMovies by remember {
         mutableStateOf(
-            listOf(
-                MovieModel(
+            mutableListOf(
+                Movie(
                     id = 1,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -99,7 +104,7 @@ fun HomeScreen () {
 
                 ),
 
-                MovieModel(
+                Movie(
                     id = 2,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -108,7 +113,7 @@ fun HomeScreen () {
                     picture = R.drawable.jungle_beat
 
                 ),
-                MovieModel(
+                Movie(
                     id = 3,
                     name = "Kermit",
                     isCheckedOff = false,
@@ -123,8 +128,8 @@ fun HomeScreen () {
 
     var upcomingMovies by remember {
         mutableStateOf(
-            listOf(
-                MovieModel(
+            mutableListOf(
+                Movie(
                     id = 1,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -134,7 +139,7 @@ fun HomeScreen () {
 
                 ),
 
-                MovieModel(
+                Movie(
                     id = 2,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -143,7 +148,7 @@ fun HomeScreen () {
                     picture = R.drawable.jungle_beat
 
                 ),
-                MovieModel(
+                Movie(
                     id = 3,
                     name = "Kermit",
                     isCheckedOff = false,
@@ -152,7 +157,7 @@ fun HomeScreen () {
                     picture = R.drawable.puppy_love
 
                 ),
-                MovieModel(
+                Movie(
                     id = 4,
                     name = "Kermit",
                     isCheckedOff = false,
@@ -165,10 +170,10 @@ fun HomeScreen () {
         )
     }
 
-    val rememberScaffoldState: ScaffoldState = rememberScaffoldState()
+
     val scrollState = rememberScrollState()
-    var flingBehavior: FlingBehavior? = null
-    var reverseScrolling: Boolean = false
+    val navController = rememberNavController()
+
 
     Box(
         modifier = Modifier
@@ -180,10 +185,111 @@ fun HomeScreen () {
         Column() {
             Scaffold(
                 topBar = { TopAppBarCompose() },
-                content = {
-                    searchBar()
-                    sectionTitle("What's up")
 
+
+
+                content = {
+                    Column(
+                        modifier = Modifier
+                            .verticalScroll(scrollState)
+
+                    ) {
+                        searchBar()
+                        sectionTitle("What's up")
+
+
+
+                        whatsUpToolBar()
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        if (movies.isNotEmpty()) {
+
+                            MovieList(
+
+                                movies,
+                                onMovieCheckedChange = { updatedMovie ->
+
+                                    val index = movies.indexOfFirst { it.id == updatedMovie.id }
+                                    movies = movies.toMutableList().apply { set(index, updatedMovie) }
+                                },
+                                onMovieClick = {
+
+                                }
+
+                            )
+                        }
+
+                        Text(
+                            text = "Now playing",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(5.dp)
+                        )
+
+                        if (popularMovies.isNotEmpty()) {
+
+                            MovieList(
+
+                                popularMovies,
+                                onMovieCheckedChange = { updatedMovie ->
+
+                                    val index = popularMovies.indexOfFirst { it.id == updatedMovie.id }
+                                    popularMovies = popularMovies.toMutableList().apply { set(index, updatedMovie) }
+                                },
+                                onMovieClick = {
+
+                                }
+
+                            )
+                        }
+
+                        Text(
+                            text = "Upcoming",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(5.dp)
+                        )
+
+                        if (upcomingMovies.isNotEmpty()) {
+
+                            MovieList(
+
+                                upcomingMovies,
+                                onMovieCheckedChange = { updatedMovie ->
+
+                                    val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
+                                    upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
+                                },
+                                onMovieClick = {
+
+                                }
+
+                            )
+                        }
+
+                        if (upcomingMovies.isNotEmpty()) {
+
+                            MovieList(
+
+                                upcomingMovies,
+                                onMovieCheckedChange = { updatedMovie ->
+
+                                    val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
+                                    upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
+                                },
+                                onMovieClick = {
+
+                                }
+
+                            )
+                        }
+
+
+
+
+                    }
 
 
                 }
@@ -197,9 +303,10 @@ fun HomeScreen () {
 
     }
 
-
-
     /*
+
+
+
 
     Column(
         modifier = Modifier
@@ -210,7 +317,8 @@ fun HomeScreen () {
 
         Spacer(modifier = Modifier
             .height(115.dp))
-
+        searchBar()
+        sectionTitle("What's up")
 
 
 
@@ -302,9 +410,11 @@ fun HomeScreen () {
         }
 
 
-    }
 
-     */
+
+    }*/
+
+
 
 
 
@@ -316,6 +426,17 @@ fun HomeScreen () {
 
 
 }
+
+fun popularMoviesSection(movies: List<Movie>) {
+    TODO("Not yet implemented")
+}
+
+
+
+
+
+
+
 
 @Composable
 fun sectionTitle(titleName: String) {
@@ -473,9 +594,9 @@ fun sectionTitle(titleName: String) {
     @ExperimentalMaterialApi
     @Composable
     fun MovieList(
-        movies: List<MovieModel>,
-        onMovieCheckedChange: (MovieModel) -> Unit,
-        onMovieClick: (MovieModel) -> Unit
+        movies: MutableList<Movie>,
+        onMovieCheckedChange: (Movie) -> Unit,
+        onMovieClick: (Movie) -> Unit
     ) {
         LazyRow {
             items(count = movies.size) { index ->
@@ -491,13 +612,28 @@ fun sectionTitle(titleName: String) {
     }
 
 
+    //NE radi R.string.homeScreen
+    @Composable
+    fun Navigation(navController: NavHostController){
+        NavHost(navController = navController, startDestination = "HomeScreen")
+        {
+            composable("HomeScreen"){
+                HomeScreen()
+            }
+            composable("FavoriteScreen"){
+                FavoriteScreen()
+            }
+        }
+    }
+
+
     @ExperimentalMaterialApi
     @Preview
     @Composable
     fun MovieListPreview() {
         MovieList(
-            movies = listOf(
-                MovieModel(
+            movies = mutableListOf(
+                Movie(
                     id = 1,
                     name = "Kermit",
                     isCheckedOff = false,
@@ -506,7 +642,7 @@ fun sectionTitle(titleName: String) {
                     picture = R.drawable.iron_man_1
 
                 ),
-                MovieModel(
+                Movie(
                     id = 2,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -515,7 +651,7 @@ fun sectionTitle(titleName: String) {
                     picture = R.drawable.avengers_1
 
                 ),
-                MovieModel(
+                Movie(
                     id = 3,
                     name = "Kermit",
                     isCheckedOff = true,
@@ -541,5 +677,7 @@ fun sectionTitle(titleName: String) {
                 .padding(16.dp)
         )
     }
+
+
 
 

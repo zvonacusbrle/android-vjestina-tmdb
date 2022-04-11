@@ -27,9 +27,9 @@ import com.company.tmdb.ui.theme.Shapes
 @Composable
 fun Movie(
     modifier: Modifier = Modifier,
-    movie: MovieModel,
-    onMovieClick: (MovieModel) -> Unit = {},
-    onMovieCheckedChange: (MovieModel) -> Unit = {}
+    movie: Movie,
+    onMovieClick: (Movie) -> Unit = {},
+    onMovieCheckedChange: (Movie) -> Unit = {}
     )
 {
     Box(
@@ -116,7 +116,7 @@ Movie(movie = MovieModel(2, "Zeljezni covjek", "Action, War",
 
  */
 
-data class MovieModel(
+data class Movie(
     val id: Long,
     val name: String,
 
