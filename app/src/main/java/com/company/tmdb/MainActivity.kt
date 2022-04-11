@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.company.tmdb.ui.theme.HomeScreen
-import com.company.tmdb.ui.theme.Router
-import com.company.tmdb.ui.theme.Screen
+import com.company.tmdb.ui.theme.Main
+
 
 import com.company.tmdb.ui.theme.TmdbTheme
 
@@ -23,17 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TmdbTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    when (Router.currentScreen) {
-                        Screen.HomeScreen -> HomeScreen()
-
-                    }
-                }
-
+                  Main()
 
             }
         }
