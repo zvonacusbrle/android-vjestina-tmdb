@@ -1,43 +1,29 @@
 package com.company.tmdb.ui.theme
 
 
-import android.icu.text.CaseMap
-import android.util.Log
-import android.widget.ToggleButton
+
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.materialIcon
-
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
+
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -172,61 +158,41 @@ fun HomeScreen () {
         )
     }
 
-    var bottomBarIcons by remember {
-        mutableStateOf(
-            mutableListOf(
-                BottomNavItem(
-                    name = "Home",
-                    route = "HomeScreen",
-                    icon = Icons.Default.Home
-
-                ),
-
-                BottomNavItem(
-                    name = "Home",
-                    route = "FavoriteScreen",
-                    icon = Icons.Default.FavoriteBorder
-
-                )))}
 
 
     val scrollState = rememberScrollState()
-    val navController = rememberNavController()
+
 
 
     Box(
         modifier = Modifier
             .background(backgroundColorApp)
             .fillMaxSize()
+            .padding(bottom = 50.dp)
+
+
 
 
     ){
         Column() {
+
             Scaffold(
+                modifier = Modifier.padding(),
                 topBar = { TopAppBarCompose() },
 
                 content = {
-
-
-
-
 
                     Column(
                         modifier = Modifier
                             .verticalScroll(scrollState)
 
+
                     ) {
-
-
 
                         searchBar()
                         sectionTitle("What's up")
-
-
-
                         whatsUpToolBar()
                         Spacer(modifier = Modifier.height(4.dp))
-
                         if (movies.isNotEmpty()) {
 
                             MovieList(
@@ -244,13 +210,8 @@ fun HomeScreen () {
                             )
                         }
 
-                        Text(
-                            text = "Now playing",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .padding(5.dp)
-                        )
+                        sectionTitle("Free to watch")
+
 
                         if (popularMovies.isNotEmpty()) {
 
@@ -268,14 +229,7 @@ fun HomeScreen () {
 
                             )
                         }
-
-                        Text(
-                            text = "Upcoming",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .padding(5.dp)
-                        )
+                        sectionTitle("Upcoming")
 
                         if (upcomingMovies.isNotEmpty()) {
 
@@ -310,9 +264,6 @@ fun HomeScreen () {
 
                             )
                         }
-
-
-
 
                     }
                 }
@@ -320,41 +271,12 @@ fun HomeScreen () {
             )
 
 
-
-
-
-
         }
 
 
     }
 
-
-
-
-
-
-
-   
-    
-
-
-
-
-
 }
-
-fun popularMoviesSection(movies: List<Movie>) {
-    TODO("Not yet implemented")
-}
-
-
-
-
-
-
-
-
 @Composable
 fun sectionTitle(titleName: String) {
     Column() {
@@ -364,7 +286,7 @@ fun sectionTitle(titleName: String) {
             fontWeight = FontWeight.Bold,
 
             modifier = Modifier
-                .padding(5.dp)
+                .padding(8.dp)
         )
     }
 
@@ -380,8 +302,10 @@ fun sectionTitle(titleName: String) {
         TabRow(
             selectedTabIndex = tabIndex,
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
+                .fillMaxWidth(0.6f)
+                .wrapContentHeight()
+                .padding(5.dp),
+
             contentColor = Color.Black,
             backgroundColor = Color.White
         ) {
@@ -440,10 +364,6 @@ fun sectionTitle(titleName: String) {
             modifier = Modifier,
 
         ) {
-           /* Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search icon"
-            )*/
 
             BasicTextField(
 
@@ -457,8 +377,8 @@ fun sectionTitle(titleName: String) {
 
                 textStyle = TextStyle(color = Color.Black),
                 modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .shadow(5.dp, CircleShape)
+                    .fillMaxWidth(0.95f)
+
                     .background(color = Color.LightGray, CircleShape,)
                     .padding(horizontal = 20.dp, vertical = 12.dp)
                     .onFocusChanged {

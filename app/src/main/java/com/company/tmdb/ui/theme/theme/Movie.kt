@@ -35,7 +35,7 @@ fun Movie(
     Box(
         contentAlignment = Alignment.TopStart,
         modifier = Modifier
-            .padding(3.dp)
+            .padding(5.dp)
             .clip(Shapes.small)
 
 
@@ -46,7 +46,7 @@ fun Movie(
         Image(
 
             painterResource(id = movie.picture),
-            contentDescription = "",
+            contentDescription = "Movie image",
             modifier = modifier
                 .height(179.dp)
                 .width(122.dp)
