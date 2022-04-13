@@ -1,7 +1,6 @@
 package com.company.tmdb.ui.theme
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -22,5 +21,15 @@ sealed class BottomBarScreen(
         route = "favorite",
         title = "Favorite",
         icon = Icons.Default.FavoriteBorder
+    )
+}
+
+sealed class DetailScreen(
+    val route: String,
+    val title: String
+){
+    object Details: DetailScreen(
+        route = "details",
+        title = "Details"
     )
 }
