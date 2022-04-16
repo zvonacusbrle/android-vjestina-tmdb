@@ -6,23 +6,35 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.company.tmdb.ui.theme.BottomBarScreen
+import androidx.navigation.compose.navigation
+import com.company.tmdb.navigation.favoriteNavGraph
+import com.company.tmdb.navigation.homeNavGraph
+import com.company.tmdb.ui.theme.Screen
+
 import com.company.tmdb.ui.theme.FavoriteScreen
 import com.company.tmdb.ui.theme.HomeScreen
+import com.company.tmdb.ui.theme.MovieDetaliScreen
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomNavGraph(navController: NavHostController){
     NavHost(
         navController =navController,
-        startDestination = BottomBarScreen.Home.route
+        startDestination = Screen.Home.route,
+        route = "root"
     ){
-        composable(route = BottomBarScreen.Home.route){
-            HomeScreen(navController = navController)
-        }
-        composable(route = BottomBarScreen.Favorite.route){
-            FavoriteScreen()
-        }
+        homeNavGraph(navController = navController)
+        favoriteNavGraph(navController = navController)
+
+
+
+
+
+
+
+
+
+
 
     }
 }
