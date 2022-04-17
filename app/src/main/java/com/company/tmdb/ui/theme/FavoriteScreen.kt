@@ -5,22 +5,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.company.tmdb.R
 import com.company.tmdb.ui.theme.theme.Movie
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FavoriteScreen (){
+fun FavoriteScreen (navController: NavController){
     var movies by remember {
         mutableStateOf(
             mutableListOf(
@@ -138,7 +134,7 @@ fun FavoriteScreen (){
 
         Column() {
             Scaffold(
-                topBar = { TopAppBarCompose() },
+                topBar = { TopAppBarCompose(navController) },
 
                 content = {
 
@@ -153,6 +149,7 @@ fun FavoriteScreen (){
                         if (movies.isNotEmpty()) {
 
                             MoviesGridList(
+                                navController,
 
                                 movies,
                                 onMovieCheckedChange = { updatedMovie ->
@@ -187,6 +184,7 @@ fun FavoriteScreen (){
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MoviesGridList(
+    navController: NavController,
     movies: MutableList<Movie>,
     onMovieCheckedChange: (Movie) -> Unit,
     onMovieClick: (Movie) -> Unit
@@ -200,8 +198,9 @@ fun MoviesGridList(
         items(count = movies.size) { index ->
             val movie = movies[index]
             Movie(
+                navController = navController,
                 movie = movie,
-                onMovieClick = onMovieClick,
+
                 onMovieCheckedChange = onMovieCheckedChange
             )
 

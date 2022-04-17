@@ -5,31 +5,27 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed class BottomBarScreen(
+sealed class Screen(
     val  route: String,
     val title: String,
-    var icon: ImageVector
+    var icon: ImageVector? = null
 
 ){
-    object Home: BottomBarScreen(
-        route = "home",
+    object Home: Screen(
+        route = "home_screen",
         title = "Home",
         icon = Icons.Default.Home
     )
 
-    object Favorite: BottomBarScreen(
-        route = "favorite",
+    object Favorite: Screen(
+        route = "favorite_screen",
         title = "Favorite",
         icon = Icons.Default.FavoriteBorder
     )
-}
-
-sealed class DetailScreen(
-    val route: String,
-    val title: String
-){
-    object Details: DetailScreen(
-        route = "details",
+    object Details: Screen(
+        route = "details_screen",
         title = "Details"
+
     )
 }
+

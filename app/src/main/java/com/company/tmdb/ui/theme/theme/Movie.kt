@@ -1,5 +1,6 @@
 package com.company.tmdb.ui.theme.theme
 
+import android.os.Parcelable
 import android.util.Log
 import android.view.RoundedCorner
 import androidx.compose.foundation.Image
@@ -20,16 +21,24 @@ import androidx.compose.ui.res.painterResource
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.company.tmdb.R
+import com.company.tmdb.ui.theme.Screen
 import com.company.tmdb.ui.theme.Shapes
+import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
+
+
+
 fun Movie(
+
     modifier: Modifier = Modifier,
+    navController: NavController,
     movie: Movie,
-    onMovieClick: (Movie) -> Unit = {},
     onMovieCheckedChange: (Movie) -> Unit = {}
+
     )
 {
     Box(
@@ -37,6 +46,14 @@ fun Movie(
         modifier = Modifier
             .padding(5.dp)
             .clip(Shapes.small)
+            .clickable {
+                navController.currentBackStackEntry?.savedStateHandle?.set("movie", movie)
+
+                navController.navigate(route = Screen.Details.route)
+                Log.i("Nav slicl", " PRITISNUTO JE ")
+
+            }
+
 
 
 
@@ -57,7 +74,12 @@ fun Movie(
 
 
             trailing = { if(movie.isCheckedOff != null) {
-                Box(modifier = Modifier.fillMaxWidth(),
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        navController.navigate(route = Screen.Details.route)
+                        Log.i("Nav clicl", " PRITISNUTO JE ")
+                    },
                     Alignment.TopStart)
                 {
                 IconToggleButton(
@@ -88,7 +110,7 @@ fun Movie(
                 }
                 }
             },
-            modifier = Modifier.clickable { onMovieClick.invoke(movie) },
+
             text = {Unit}
         )
 
@@ -116,17 +138,12 @@ Movie(movie = MovieModel(2, "Zeljezni covjek", "Action, War",
 
  */
 
+@Parcelize
 data class Movie(
     val id: Long,
     val name: String,
-
     val movieType: String,
-
     val overview: String,
     var isCheckedOff: Boolean? = null,
     val picture: Int
-
-
-
-
-)
+) : Parcelable

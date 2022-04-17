@@ -2,24 +2,19 @@ package com.company.tmdb.ui.theme
 
 
 
+import android.util.Log
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,27 +24,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 
 import com.company.tmdb.R
-import com.company.tmdb.ui.theme.theme.BottomNavItem
 import com.company.tmdb.ui.theme.theme.Movie
 
 
 
 @ExperimentalMaterialApi
 @Composable
-fun HomeScreen () {
+fun HomeScreen (navController: NavController) {
     var movies by remember {
         mutableStateOf(
             mutableListOf(
                 Movie(
                     id = 1,
-                    name = "Kermit",
+                    name = "Avengers",
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
@@ -59,7 +48,7 @@ fun HomeScreen () {
 
                 Movie(
                     id = 2,
-                    name = "Kermit",
+                    name = "Gattaca",
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
@@ -68,7 +57,7 @@ fun HomeScreen () {
                 ),
                 Movie(
                     id = 3,
-                    name = "Kermit",
+                    name = "Puppy Love",
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
@@ -173,18 +162,20 @@ fun HomeScreen () {
 
 
 
+
     ){
         Column() {
 
             Scaffold(
                 modifier = Modifier.padding(),
-                topBar = { TopAppBarCompose() },
+                topBar = { TopAppBarCompose(navController = navController) },
 
                 content = {
 
                     Column(
                         modifier = Modifier
                             .verticalScroll(scrollState)
+
 
 
                     ) {
@@ -197,15 +188,16 @@ fun HomeScreen () {
 
                             MovieList(
 
+                                navController = navController,
                                 movies,
                                 onMovieCheckedChange = { updatedMovie ->
 
                                     val index = movies.indexOfFirst { it.id == updatedMovie.id }
                                     movies = movies.toMutableList().apply { set(index, updatedMovie) }
-                                },
-                                onMovieClick = {
 
-                                }
+
+                                },
+
 
                             )
                         }
@@ -216,6 +208,7 @@ fun HomeScreen () {
                         if (popularMovies.isNotEmpty()) {
 
                             MovieList(
+                                navController = navController,
 
                                 popularMovies,
                                 onMovieCheckedChange = { updatedMovie ->
@@ -223,9 +216,7 @@ fun HomeScreen () {
                                     val index = popularMovies.indexOfFirst { it.id == updatedMovie.id }
                                     popularMovies = popularMovies.toMutableList().apply { set(index, updatedMovie) }
                                 },
-                                onMovieClick = {
 
-                                }
 
                             )
                         }
@@ -234,6 +225,7 @@ fun HomeScreen () {
                         if (upcomingMovies.isNotEmpty()) {
 
                             MovieList(
+                                navController = navController,
 
                                 upcomingMovies,
                                 onMovieCheckedChange = { updatedMovie ->
@@ -241,9 +233,7 @@ fun HomeScreen () {
                                     val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
                                     upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
                                 },
-                                onMovieClick = {
 
-                                }
 
                             )
                         }
@@ -251,15 +241,13 @@ fun HomeScreen () {
                         if (upcomingMovies.isNotEmpty()) {
 
                             MovieList(
+                                navController = navController,
 
                                 upcomingMovies,
                                 onMovieCheckedChange = { updatedMovie ->
 
                                     val index = upcomingMovies.indexOfFirst { it.id == updatedMovie.id }
                                     upcomingMovies = upcomingMovies.toMutableList().apply { set(index, updatedMovie) }
-                                },
-                                onMovieClick = {
-
                                 }
 
                             )
@@ -403,61 +391,48 @@ fun sectionTitle(titleName: String) {
 
 
 
-    @Composable
-    fun TopAppBarCompose() {
-        TopAppBar(
-            title = {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Image(
-                        painterResource(
-                            id = R.drawable.tmdb_logo
-                        ),
-                        "Logo picture",
-                        modifier = Modifier
-                            .size(130.dp)
-                            .align(Alignment.Center)
-                    )
-                }
-            },
-            backgroundColor = Color(0xFF0B253F)
 
-
-        )
-
-
-    }
 
 
     @ExperimentalMaterialApi
     @Composable
     fun MovieList(
+
+        navController: NavController,
         movies: MutableList<Movie>,
         onMovieCheckedChange: (Movie) -> Unit,
-        onMovieClick: (Movie) -> Unit
+
     ) {
         LazyRow {
+
             items(count = movies.size) { index ->
                 val movie = movies[index]
                 Movie(
+                    navController = navController,
                     movie = movie,
-                    onMovieClick = onMovieClick,
-                    onMovieCheckedChange = onMovieCheckedChange
+
+                    onMovieCheckedChange = onMovieCheckedChange,
+
+
                 )
+
 
             }
         }
+
     }
 
 
 
 
-
+/*
 
     @ExperimentalMaterialApi
     @Preview
     @Composable
     fun MovieListPreview() {
         MovieList(
+            navController = navController,
             movies = mutableListOf(
                 Movie(
                     id = 1,
@@ -465,7 +440,8 @@ fun sectionTitle(titleName: String) {
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.iron_man_1
+                    picture = R.drawable.iron_man_1,
+
 
                 ),
                 Movie(
@@ -491,7 +467,7 @@ fun sectionTitle(titleName: String) {
             onMovieClick = {}
         )
     }
-
+*/
 
     @Preview
     @Composable

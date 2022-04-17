@@ -17,14 +17,16 @@ import com.company.tmdb.ui.theme.MovieDetaliScreen
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomNavGraph(navController: NavHostController){
+fun BottomNavGraph(
+    navController: NavHostController
+){
     NavHost(
         navController =navController,
-        startDestination = Screen.Home.route,
+        startDestination = "home",
         route = "root"
     ){
         homeNavGraph(navController = navController)
-        favoriteNavGraph(navController = navController)
+        //favoriteNavGraph(navController = navController)
 
 
 
