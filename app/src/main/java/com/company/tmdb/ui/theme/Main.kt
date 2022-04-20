@@ -1,3 +1,5 @@
+@file:Suppress("PreviewAnnotationInFunctionWithParameters")
+
 package com.company.tmdb.ui.theme
 
 import android.util.Log
@@ -9,6 +11,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
@@ -16,6 +19,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -81,20 +85,16 @@ fun RowScope.AddItem(
 
 
 ){
-    /*if(screen.title == "Favorite"){
-        screen.icon =
-    }*/
     BottomNavigationItem(
         label = {
             Text(text = screen.title)
     },
         icon = {
-            if (screen.title == "Favorite"){
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "Screen icon"
-                )
-
+            if (currentDestination.route == Screen.Favorite.route){
+                Screen.Favorite.icon = Icons.Default.Favorite
+            }
+            else{
+                Screen.Favorite.icon = Icons.Default.FavoriteBorder
             }
             screen.icon?.let {
                 Icon(
@@ -125,29 +125,37 @@ fun RowScope.AddItem(
 
 @Composable
 fun TopAppBarCompose(navController: NavController) {
+    val currentRoute = navController
+        .currentBackStackEntryFlow
+        .collectAsState(initial = navController.currentBackStackEntry)
 
-    if(navController.previousBackStackEntry != null){
-
+    val showBackButton = when (currentRoute.value?.destination?.route){
+        Screen.Home.route -> false
+        Screen.Favorite.route -> false
+        else -> true
+    }
+    if(showBackButton){
         TopAppBar(
-            modifier =
-            Modifier
-                .fillMaxWidth(),
             title = {
-
-
                 Box(
+                    modifier =
+                    Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.CenterStart
                 ) {
-                    Image(
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Image(
+                            painterResource(
+                                id = R.drawable.tmdb_logo
+                            ),
+                            "Logo picture",
+                            modifier = Modifier
+                                .size(130.dp)
 
-                        painterResource(
-                            id = R.drawable.tmdb_logo
+                        )
+                    }
 
-                        ),
-                        "Logo picture",
-                        modifier = Modifier
-                            .size(130.dp)
 
-                    )
                 }
             },
             backgroundColor = Color(0xFF0B253F),
@@ -185,4 +193,5 @@ fun TopAppBarCompose(navController: NavController) {
 
 
 }
+
 
