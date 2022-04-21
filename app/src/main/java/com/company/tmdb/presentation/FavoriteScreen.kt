@@ -143,7 +143,7 @@ fun FavoriteScreen (navController: NavController){
 
 
                     ) {
-                        Spacer(modifier = Modifier.height(40.dp))
+                        Spacer(modifier = Modifier.height(30.dp))
                         sectionTitle("Favorite")
                         
                         if (movies.isNotEmpty()) {

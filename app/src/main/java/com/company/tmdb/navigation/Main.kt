@@ -2,8 +2,10 @@
 
 package com.company.tmdb.ui.theme
 
+import android.graphics.Paint
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -16,8 +18,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment.Companion.TopCenter
+import androidx.compose.ui.Alignment.Companion.TopEnd
+import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,20 +44,33 @@ import com.company.tmdb.ui.theme.theme.BottomNavGraph
 @Composable
 fun Main(){
     val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
 
+    val currentRoute = navController
+        .currentBackStackEntryFlow
+        .collectAsState(initial = navController.currentBackStackEntry)
 
-    
-    Scaffold(
-
-
-        bottomBar = {BottomBar(navController = navController)},
-
-
-    ) {
-        BottomNavGraph(navController = navController)
+    val showBottomBar = when (currentRoute.value?.destination?.route){
+        Screen.Details.route -> false
+        else -> true
     }
+
+    if (showBottomBar){
+        Scaffold(
+            bottomBar = {BottomBar(navController = navController)},
+        ) {
+            BottomNavGraph(navController = navController)
+        }
+    } else{
+        Scaffold(
+
+        ) {
+            BottomNavGraph(navController = navController)
+        }
+    }
+
+
+
+
 }
 
 @Composable
@@ -136,14 +158,11 @@ fun TopAppBarCompose(navController: NavController) {
     }
     if(showBackButton){
         TopAppBar(
+
+
+
             title = {
-                Box(
-                    modifier =
-                    Modifier
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
+
                         Image(
                             painterResource(
                                 id = R.drawable.tmdb_logo
@@ -153,10 +172,6 @@ fun TopAppBarCompose(navController: NavController) {
                                 .size(130.dp)
 
                         )
-                    }
-
-
-                }
             },
             backgroundColor = Color(0xFF0B253F),
             navigationIcon = {

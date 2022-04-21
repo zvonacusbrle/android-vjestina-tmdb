@@ -366,7 +366,6 @@ fun sectionTitle(titleName: String) {
                 textStyle = TextStyle(color = Color.Black),
                 modifier = Modifier
                     .fillMaxWidth(0.95f)
-
                     .background(color = Color.LightGray, CircleShape,)
                     .padding(horizontal = 20.dp, vertical = 12.dp)
                     .onFocusChanged {
