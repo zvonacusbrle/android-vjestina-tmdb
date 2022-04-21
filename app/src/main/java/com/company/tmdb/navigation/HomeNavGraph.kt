@@ -4,13 +4,11 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.navigation
-import com.company.tmdb.ui.theme.FavoriteScreen
-import com.company.tmdb.ui.theme.HomeScreen
-import com.company.tmdb.ui.theme.MovieDetaliScreen
-import com.company.tmdb.ui.theme.Screen
-import com.company.tmdb.ui.theme.theme.Movie
+import com.company.tmdb.presentation.Movie
+import com.company.tmdb.presentation.theme.FavoriteScreen
+import com.company.tmdb.presentation.theme.HomeScreen
+import com.company.tmdb.presentation.theme.MovieDetaliScreen
 
 @OptIn(ExperimentalMaterialApi::class)
 fun NavGraphBuilder.homeNavGraph(

@@ -1,4 +1,4 @@
-package com.company.tmdb.ui.theme
+package com.company.tmdb.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder

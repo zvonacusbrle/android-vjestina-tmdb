@@ -1,4 +1,4 @@
-package com.company.tmdb.ui.theme
+package com.company.tmdb.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

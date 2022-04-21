@@ -1,8 +1,7 @@
-package com.company.tmdb.ui.theme
+package com.company.tmdb.presentation.theme
 
 
 
-import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -15,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 
@@ -26,8 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 import com.company.tmdb.R
-import com.company.tmdb.ui.theme.theme.Movie
-
+import com.company.tmdb.presentation.Movie
 
 
 @ExperimentalMaterialApi
@@ -42,7 +39,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.avengers_1
+                    picture = R.drawable.avengers_1,
+                    userScore = 72.0
 
                 ),
 
@@ -52,7 +50,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.iron_man_1
+                    picture = R.drawable.iron_man_1,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -61,7 +60,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 )
             )
@@ -77,7 +77,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.jungle_beat
+                    picture = R.drawable.jungle_beat,
+                    userScore = 72.0
 
                 ),
 
@@ -87,7 +88,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.jungle_beat
+                    picture = R.drawable.jungle_beat,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -96,7 +98,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.jungle_beat
+                    picture = R.drawable.jungle_beat,
+                    userScore = 72.0
 
                 )
             )
@@ -112,7 +115,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.avengers_1
+                    picture = R.drawable.avengers_1,
+                    userScore = 72.0
 
                 ),
 
@@ -122,7 +126,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.jungle_beat
+                    picture = R.drawable.jungle_beat,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -131,7 +136,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -140,7 +146,8 @@ fun HomeScreen (navController: NavController) {
                     isCheckedOff = false,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.jungle_beat
+                    picture = R.drawable.jungle_beat,
+                    userScore = 72.0
 
                 )
             )

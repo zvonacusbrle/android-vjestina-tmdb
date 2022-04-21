@@ -1,4 +1,4 @@
-package com.company.tmdb.ui.theme
+package com.company.tmdb.presentation.theme
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -12,7 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.company.tmdb.R
-import com.company.tmdb.ui.theme.theme.Movie
+import com.company.tmdb.presentation.Movie
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -26,7 +27,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.avengers_1
+                    picture = R.drawable.avengers_1,
+                    userScore = 72.0
 
                 ),
 
@@ -36,7 +38,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.iron_man_1
+                    picture = R.drawable.iron_man_1,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -45,7 +48,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -54,7 +58,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -63,7 +68,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -72,7 +78,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -81,7 +88,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -90,7 +98,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -99,7 +108,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -108,7 +118,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore = 72.0
 
                 ),
                 Movie(
@@ -117,7 +128,8 @@ fun FavoriteScreen (navController: NavController){
                     isCheckedOff = true,
                     movieType = "Action",
                     overview = "None",
-                    picture = R.drawable.puppy_love
+                    picture = R.drawable.puppy_love,
+                    userScore =  72.0
 
                 )
 

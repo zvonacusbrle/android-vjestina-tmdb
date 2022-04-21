@@ -1,4 +1,4 @@
-package com.company.tmdb.ui.theme.theme
+package com.company.tmdb.navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

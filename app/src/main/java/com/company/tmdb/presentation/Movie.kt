@@ -1,8 +1,7 @@
-package com.company.tmdb.ui.theme.theme
+package com.company.tmdb.presentation
 
 import android.os.Parcelable
 import android.util.Log
-import android.view.RoundedCorner
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,12 +18,10 @@ import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.res.painterResource
 
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.company.tmdb.R
-import com.company.tmdb.ui.theme.Screen
-import com.company.tmdb.ui.theme.Shapes
+import com.company.tmdb.navigation.Screen
+import com.company.tmdb.presentation.theme.Shapes
 import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -145,5 +142,6 @@ data class Movie(
     val movieType: String,
     val overview: String,
     var isCheckedOff: Boolean? = null,
-    val picture: Int
+    val picture: Int,
+    val userScore: Double
 ) : Parcelable

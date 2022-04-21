@@ -4,11 +4,13 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.company.tmdb.presentation.Movie
+import com.company.tmdb.presentation.movie_detail.components.MovieUserScore
 
 
 @Composable
@@ -26,7 +28,7 @@ fun MovieDetaliScreen(navController: NavController, movie: Movie){
                 topBar = { TopAppBarCompose(navController = navController) },
                 content = {
                         topImageDetails(movie)
-
+                    
 
                         }
 
@@ -57,6 +59,12 @@ fun topImageDetails(movie: Movie) {
                 contentScale = ContentScale.FillBounds
 
             )
+            Column(
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                MovieUserScore(userScore = movie.userScore)
+            }
 
         }
     )
