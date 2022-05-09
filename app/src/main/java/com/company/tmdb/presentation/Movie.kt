@@ -129,7 +129,7 @@ fun Movie(
 @Composable
 fun MoviePreview(){
 Movie(movie = MovieModel(2, "Zeljezni covjek", "Action, War",
-        "Not good not bad",  true,  R.drawable.iron_man_1
+        "Not good not bad",  true,  R.drawable.iron_man_1, 75
 ))
 }
 

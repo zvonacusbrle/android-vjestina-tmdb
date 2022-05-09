@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="topAppBar">#0B253F</color>
+    <color name="favoriteButtonBackgorund">#757575</color>
 </resources>

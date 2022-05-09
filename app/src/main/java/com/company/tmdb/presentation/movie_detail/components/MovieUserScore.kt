@@ -83,10 +83,11 @@ fun CircularProgressBar(
                     style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
                 )
             }
-            //  Text(text = "${userScore.toInt()}")
+            var userScoreResult = (currentPercentage.value * 100).toInt()
             Text(
-                text = (currentPercentage.value * 100).toInt().toString(),
-                color = Color.White
+                text = "$userScoreResult%",
+                color = Color.White,
+                fontSize = 12.sp
             )
 
         }
