@@ -4,7 +4,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,11 +17,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.company.tmdb.presentation.Movie
 import com.company.tmdb.presentation.movie_detail.components.FavoriteButtonIcon
+import com.company.tmdb.presentation.movie_detail.components.MovieCrewCard
 import com.company.tmdb.presentation.movie_detail.components.MovieUserScore
 
 
 @Composable
 fun MovieDetaliScreen(navController: NavController, movie: Movie){
+
+
+
 
     Box(
         modifier = Modifier
@@ -34,8 +38,17 @@ fun MovieDetaliScreen(navController: NavController, movie: Movie){
             Scaffold(
                 topBar = { TopAppBarCompose(navController = navController) },
                 content = {
+                    Column() {
                         topImageDetails(movie)
+                        Column() {
+                            Text(text = "DSADSADsda")
                         }
+
+
+
+                        }
+                    }
+
                     )
                 }
         }

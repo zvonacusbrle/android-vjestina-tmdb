@@ -26,9 +26,6 @@ import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-
-
-
 fun Movie(
 
     modifier: Modifier = Modifier,
@@ -140,8 +137,10 @@ data class Movie(
     val id: Long,
     val name: String,
     val movieType: String,
-    val overview: String,
+    val overview: String = "After being held by aliens things started to happen.",
     var isCheckedOff: Boolean? = null,
     val picture: Int,
-    val userScore: Double
+    val userScore: Double,
+    val character: String = "Don Heck"
+
 ) : Parcelable

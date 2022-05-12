@@ -3,6 +3,7 @@
 package com.company.tmdb.presentation.theme
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,7 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -145,34 +148,57 @@ fun TopAppBarCompose(navController: NavController) {
         else -> true
     }
     if(showBackButton){
-        TopAppBar(
+
+            TopAppBar(
+                modifier = Modifier.fillMaxWidth()
+                    .border(2.dp, color = Color.White, shape = RectangleShape)
+                    ,
 
 
 
-            title = {
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth()
+                            .border(2.dp, color = Color.Yellow, shape = RectangleShape),
+                       contentAlignment = Alignment.TopStart
+                    ){
+                        Image(
+                            painterResource(
+                                id = R.drawable.tmdb_logo
+                            ),
+                            "Logo picture",
+                            modifier = Modifier
+                                .size(130.dp)
 
-                    Image(
-                        painterResource(
-                            id = R.drawable.tmdb_logo
-                        ),
-                        "Logo picture",
-                        modifier = Modifier
-                            .size(130.dp)
+                                .border(2.dp, color = Color.Green, shape = RectangleShape),
 
-                    )
 
-            },
-            backgroundColor = Color(0xFF0B253F),
-            navigationIcon = {
-                IconButton(onClick = {
-                    navController.navigateUp()
+                            )
+                    }
+
+
+                },
+
+
+                backgroundColor = Color(0xFF0B253F),
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.navigateUp()
+                    },
+                        modifier = Modifier.border(2.dp, color = Color.Red, shape = RectangleShape)
+                    ) {
+                        Icon(Icons.Rounded.ArrowBack, "Back arrow")
+                    }
                 }
-                ) {
-                    Icon(Icons.Rounded.ArrowBack, "Back arrow")
-                }
-            }
 
-        )
+
+            )
+
+
+
+
+
+
     } else{
         TopAppBar(
             title = {
@@ -197,5 +223,4 @@ fun TopAppBarCompose(navController: NavController) {
 
 
 }
-
 
