@@ -25,11 +25,17 @@ import androidx.navigation.NavController
 
 import com.company.tmdb.R
 import com.company.tmdb.presentation.Movie
+import com.company.tmdb.presentation.home.HomeViewModel
 
 
 @ExperimentalMaterialApi
 @Composable
 fun HomeScreen (navController: NavController) {
+
+
+
+
+
     var movies by remember {
         mutableStateOf(
             mutableListOf(

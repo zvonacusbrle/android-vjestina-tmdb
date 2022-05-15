@@ -6,6 +6,8 @@ import com.company.tmdb.repo.MovieRepository
 class HomeViewModel(
     private val repository: MovieRepository
 ):ViewModel() {
-
+        fun nesto(){
+            print("AAAAAAAAAAAAAAAAAAAAA")
+        }
 
 }

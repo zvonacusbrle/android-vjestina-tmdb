@@ -1,12 +1,16 @@
 package com.company.tmdb.repo
 
+import android.util.Log
+import com.company.tmdb.MovieApi
 import com.company.tmdb.presentation.Movie
 import kotlinx.coroutines.flow.Flow
 
 class MovieRepositoryImpl(
-
+    private val movieApi: MovieApi
 ): MovieRepository {
-    override fun getMovies(): Flow<List<Movie>> {
-        TODO("Not yet implemented")
+    override suspend fun getMovies(){
+        val film = movieApi.getPopularMovies()
+
+
     }
 }
