@@ -3,7 +3,9 @@ package com.company.tmdb.presentation.home
 import androidx.lifecycle.ViewModel
 import com.company.tmdb.repo.MovieRepository
 
-class HomeViewModel:ViewModel() {
+class HomeViewModel(
+    private val repository: MovieRepository
+):ViewModel() {
 
-    private val repository = MovieRepository()
+
 }
