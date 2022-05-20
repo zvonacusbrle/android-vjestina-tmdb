@@ -29,12 +29,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.company.tmdb.R
 import com.company.tmdb.navigation.Screen
+import com.company.tmdb.presentation.home.HomeViewModel
 import com.company.tmdb.ui.theme.BottomNavGraph
 
 
 @Composable
-fun Main(){
+fun Main() {
     val navController = rememberNavController()
+
 
     val currentRoute = navController
         .currentBackStackEntryFlow

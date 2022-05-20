@@ -2,6 +2,7 @@ package com.company.tmdb.presentation.theme
 
 
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -21,19 +22,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 import com.company.tmdb.R
 import com.company.tmdb.presentation.Movie
 import com.company.tmdb.presentation.home.HomeViewModel
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModel
 
 
 @ExperimentalMaterialApi
 @Composable
 fun HomeScreen (navController: NavController) {
 
-
-
+    val viewModel = viewModel<HomeViewModel>()
+    viewModel.nesto()
 
 
     var movies by remember {
@@ -278,6 +282,9 @@ fun HomeScreen (navController: NavController) {
     }
 
 }
+
+
+
 @Composable
 fun sectionTitle(titleName: String) {
     Column() {

@@ -27,6 +27,7 @@ import com.company.tmdb.navigation.Screen
 import com.company.tmdb.presentation.Movie
 import com.company.tmdb.presentation.theme.Shapes
 import com.company.tmdb.presentation.theme.favoriteButtonBackgorund
+import org.koin.core.component.KoinComponent
 
 @Composable
 fun FavoriteButtonIcon(movie: Movie) {

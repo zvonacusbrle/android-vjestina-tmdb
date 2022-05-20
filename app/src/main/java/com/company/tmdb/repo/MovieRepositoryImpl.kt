@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 class MovieRepositoryImpl(
     private val movieApi: MovieApi
 ): MovieRepository {
-    override suspend fun getMovies(){
-        val film = movieApi.getPopularMovies()
-
-
+    override suspend fun getPopularMovies() : Flow<List<Movie>>{
+        TODO("STH")
+        Log.i("MovieRepo", "${movieApi.getPopularMovies().toString()}")
     }
+
 }
