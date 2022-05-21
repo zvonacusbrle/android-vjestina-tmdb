@@ -17,27 +17,36 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-
-
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-
 import com.company.tmdb.R
 import com.company.tmdb.presentation.Movie
-import com.company.tmdb.presentation.home.HomeViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.ViewModel
+import androidx.compose.runtime.setValue
+import com.company.tmdb.presentation.home.HomeViewModel
+import kotlinx.coroutines.flow.toList
+import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.context.GlobalContext.get
 
 
 @ExperimentalMaterialApi
 @Composable
-fun HomeScreen (navController: NavController) {
 
-    val viewModel = viewModel<HomeViewModel>()
-    viewModel.nesto()
+fun HomeScreen (
+    navController: NavController
+
+) {
+
+    val viewModel = getViewModel<HomeViewModel>()
+
+   
+
 
 
     var movies by remember {
@@ -282,6 +291,7 @@ fun HomeScreen (navController: NavController) {
     }
 
 }
+
 
 
 

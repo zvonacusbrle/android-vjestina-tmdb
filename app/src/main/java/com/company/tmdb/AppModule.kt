@@ -11,19 +11,22 @@ import org.koin.dsl.module
 import androidx.compose.runtime.getValue
 import com.company.tmdb.presentation.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 
-class Movie(private val movie: Movie)
 
 val appModule = module{
 
-    factory{com.company.tmdb.Movie(movie = get<Movie>())}
+    single<MovieApi>{
+        MovieApiImpl()
+    }
 
     single<MovieRepository>{
         MovieRepositoryImpl(get())
     }
 
+
     viewModel {
-        HomeViewModel()
+        HomeViewModel(get())
     }
 
 
