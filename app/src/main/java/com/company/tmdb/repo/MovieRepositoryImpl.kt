@@ -15,7 +15,9 @@ import kotlinx.coroutines.flow.flow
             while(true){
                 val lastMovieX = movieApi.getPopularMovies()
                 Log.i("EMIT", "${emit(lastMovieX)}")
-              //  kotlinx.coroutines.delay(1000)
+                kotlinx.coroutines.delay(5000)
+
+
             }
         }
         Log.i("MOVIEAPI", movieZ.toString())

@@ -25,7 +25,16 @@ class MovieApiImpl : MovieApi{
 
             ),
             Movie(
-                id = 1,
+                id = 2,
+                name = "Avengers",
+                isCheckedOff = true,
+                movieType = "Action",
+                overview = "None",
+                picture = R.drawable.avengers_1,
+                userScore = 72.0
+
+            ),Movie(
+                id = 3,
                 name = "Avengers",
                 isCheckedOff = true,
                 movieType = "Action",

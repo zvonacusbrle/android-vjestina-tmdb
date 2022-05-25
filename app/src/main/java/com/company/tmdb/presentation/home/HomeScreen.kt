@@ -20,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.company.tmdb.R
 import com.company.tmdb.presentation.Movie
@@ -28,24 +27,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
 import com.company.tmdb.presentation.home.HomeViewModel
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.runBlocking
+import org.koin.androidx.compose.getKoin
 import org.koin.androidx.compose.getViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.core.context.GlobalContext.get
+
 
 
 @ExperimentalMaterialApi
 @Composable
 
-fun HomeScreen (
+ fun HomeScreen (
     navController: NavController
 
 ) {
 
-    val viewModel = getViewModel<HomeViewModel>()
+    val viewModel = org.koin.androidx.compose.getViewModel<HomeViewModel>()
 
-   
+
+
+
+
 
 
 
