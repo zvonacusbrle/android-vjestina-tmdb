@@ -30,7 +30,7 @@ class MovieApiImpl : MovieApi{
                 isCheckedOff = true,
                 movieType = "Action",
                 overview = "None",
-                picture = R.drawable.avengers_1,
+                picture = R.drawable.iron_man_1,
                 userScore = 72.0
 
             ),Movie(

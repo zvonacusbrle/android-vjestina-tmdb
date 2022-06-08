@@ -29,11 +29,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.company.tmdb.presentation.home.HomeViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.runBlocking
-import org.koin.androidx.compose.getKoin
-import org.koin.androidx.compose.getViewModel
+import kotlinx.coroutines.launch
 
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.KoinApplication.Companion.init
 
 
 @ExperimentalMaterialApi
@@ -44,7 +43,12 @@ import org.koin.androidx.compose.getViewModel
 
 ) {
 
-    val viewModel = org.koin.androidx.compose.getViewModel<HomeViewModel>()
+    val viewModel = getViewModel<HomeViewModel>()
+
+    var popularMovies = viewModel.getPopularMovies()
+
+
+
 
 
 
@@ -91,43 +95,7 @@ import org.koin.androidx.compose.getViewModel
         )
     }
 
-    var popularMovies by remember {
-        mutableStateOf(
-            mutableListOf(
-                Movie(
-                    id = 1,
-                    name = "Kermit",
-                    isCheckedOff = true,
-                    movieType = "Action",
-                    overview = "None",
-                    picture = R.drawable.jungle_beat,
-                    userScore = 72.0
 
-                ),
-
-                Movie(
-                    id = 2,
-                    name = "Kermit",
-                    isCheckedOff = true,
-                    movieType = "Action",
-                    overview = "None",
-                    picture = R.drawable.jungle_beat,
-                    userScore = 72.0
-
-                ),
-                Movie(
-                    id = 3,
-                    name = "Kermit",
-                    isCheckedOff = false,
-                    movieType = "Action",
-                    overview = "None",
-                    picture = R.drawable.jungle_beat,
-                    userScore = 72.0
-
-                )
-            )
-        )
-    }
 
     var upcomingMovies by remember {
         mutableStateOf(
@@ -214,7 +182,7 @@ import org.koin.androidx.compose.getViewModel
                         sectionTitle("What's up")
                         whatsUpToolBar()
                         Spacer(modifier = Modifier.height(4.dp))
-                        if (movies.isNotEmpty()) {
+                        /*if (movies.isNotEmpty()) {
 
                             MovieList(
 
@@ -230,7 +198,7 @@ import org.koin.androidx.compose.getViewModel
 
 
                             )
-                        }
+                        }*/
 
                         sectionTitle("Free to watch")
 
@@ -252,7 +220,7 @@ import org.koin.androidx.compose.getViewModel
                         }
                         sectionTitle("Upcoming")
 
-                        if (upcomingMovies.isNotEmpty()) {
+                    /*    if (upcomingMovies.isNotEmpty()) {
 
                             MovieList(
                                 navController = navController,
@@ -281,7 +249,7 @@ import org.koin.androidx.compose.getViewModel
                                 }
 
                             )
-                        }
+                        }*/
 
                     }
                 }
